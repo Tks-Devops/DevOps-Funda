@@ -1,0 +1,99 @@
+# Git Merge and Rebase Example
+
+## Step-by-Step Guide
+
+### 1. Initialize a Git Repository
+```bash
+mkdir merge-rebase-test
+cd merge-rebase-test
+git init
+```
+
+### 2. Create a File and Make Initial Commit
+```bash
+echo "Line 1: Initial content" > test.txt
+git add test.txt
+git commit -m "Initial commit with test.txt"
+```
+
+### 3. Create and Switch to a New Branch
+```bash
+git branch feature
+git checkout feature
+```
+
+### 4. Modify the File in the `feature` Branch
+```bash
+echo "Line 2: Added in feature branch" >> test.txt
+git add test.txt
+git commit -m "Added Line 2 in feature branch"
+```
+
+### 5. Switch Back to `master` and Modify the File
+```bash
+git checkout master
+echo "Line 2: Added in master branch" >> test.txt
+git add test.txt
+git commit -m "Added Line 2 in master branch"
+```
+
+---
+
+## Using `git merge`
+
+### 6. Merge the `feature` Branch into `master`
+```bash
+git merge feature
+```
+
+If there are conflicts, Git will notify you. Open the file, resolve conflicts, and commit the merge:
+```bash
+nano test.txt  # Resolve conflicts manually
+git add test.txt
+git commit -m "Resolved merge conflicts and completed merge"
+```
+
+---
+
+## Using `git rebase`
+
+### 7. Reset the Repository to Before Merge
+To test `git rebase`, reset the repository to before the merge:
+```bash
+git reset --hard HEAD~1
+```
+
+### 8. Rebase the `feature` Branch onto `master`
+```bash
+git checkout feature
+git rebase master
+```
+
+If there are conflicts during the rebase:
+1. Resolve the conflicts in the file (`test.txt`).
+2. Stage the resolved file:
+   ```bash
+   git add test.txt
+   ```
+3. Continue the rebase:
+   ```bash
+   git rebase --continue
+   ```
+
+---
+
+## Verify the Final State
+
+### 9. Switch Back to `master` and Merge Again
+After rebasing, merge the `feature` branch back into `master`:
+```bash
+git checkout master
+git merge feature
+```
+
+---
+
+## View the Git History
+To compare how `merge` and `rebase` affect the Git history, use:
+```bash
+git log --graph --oneline --all
