@@ -1,0 +1,17 @@
+FROM ubuntu:latest
+
+# Update package list and install necessary dependencies
+RUN apt-get update && apt-get install -y software-properties-common
+
+# Install Apache2
+RUN apt-get update && apt-get -y install apache2
+
+# Copy the local directory to the container's /var/www/html
+ADD ./var/www/html /var/www/html
+
+# Start Apache in the foreground
+ENTRYPOINT ["apachectl", "-D", "FOREGROUND"]
+
+# Set an environment variable
+ENV name=Devops-Alchemy
+
