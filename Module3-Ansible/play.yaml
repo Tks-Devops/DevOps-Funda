@@ -1,0 +1,22 @@
+---
+- hosts: slave1
+  become: yes
+  name: Install Nginx on Slave1
+  tasks:
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: latest
+
+- hosts: slave2
+  become: yes
+  name: Install Apache on Slave2 and Add Website
+  tasks:
+    - name: Install Apache
+      apt:
+        name: apache2
+        state: latest
+
+    - name: Adding Website
+      script: /home/ubuntu/hello.sh
+
