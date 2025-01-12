@@ -1,0 +1,6 @@
+---
+# vars file for apache
+
+# Apache-specific variables
+apache_logs_dir: /opt/httpd_logs
+apache_config_file: /etc/apache2/apache2.conf

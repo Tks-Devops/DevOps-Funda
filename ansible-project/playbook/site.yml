@@ -1,0 +1,12 @@
+---
+- name: Deploy Apache web server
+  hosts: webservers
+  gather_facts: true
+  roles:
+    - apache
+  vars:
+    apache_name: Kelly
+    apache_port: 91
+    apache_package: apache2
+    apache_group: apache
+    apache_user: apache

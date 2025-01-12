@@ -1,0 +1,13 @@
+---
+- name: Copy index.html to remote servers
+  copy:
+    src: files/index.html
+    dest: /var/www/html
+    mode: "0644"
+  notify: restart apache
+- name: Copy configuration template
+  template:
+    src: template/httpd.conf.j2
+    dest: /etc/apache2/apache2.conf
+    mode: "0644"
+  notify: restart apache

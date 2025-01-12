@@ -1,0 +1,18 @@
+- name: Create a group
+  group:
+    name: "{{ apache_group }}"
+    state: present
+
+- name: Create a user
+  user:
+    name: "{{ apache_user }}"
+    state: present
+    groups: "{{ apache_group }}"
+
+- name: Create a directory for logs
+  file:
+    path: /opt/httpd_logs
+    state: directory
+    mode: '0755'
+    owner: "{{ apache_user }}"
+    group: "{{ apache_group }}"

@@ -1,0 +1,9 @@
+# Apache Configuration File
+ServerName {{ apache_name }}
+Listen {{ apache_port }}
+
+<VirtualHost *:{{ apache_port }}>
+    DocumentRoot "/var/www/html"
+    ErrorLog "/var/log/apache2/error.log"
+    CustomLog "/var/log/apache2/access.log" combined
+</VirtualHost>

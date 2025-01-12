@@ -1,0 +1,5 @@
+---
+- name: Start Apache service
+  service:
+    name: "{{ apache_package }}"
+    state: started
